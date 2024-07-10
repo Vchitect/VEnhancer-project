@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="VEnhancer">
+  <meta name="keywords" content="Generative video enhancement, space-time super-resolution">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VEnhancer</title>
+  <!-- Latex -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+      </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<!--   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+
+  </script> -->
+  <style>
+  .hr {width: 100%; height: 1px; margin: 48px 0; background-color: #d6dbdf;}
+  </style>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/bulma.min.css">
+  <link rel="stylesheet" href="./assets/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./assets/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./assets/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./assets/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <!-- custom css file  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/twentytwenty.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop head">
+      <div class="columns is-centered">
+        <div class="column has-text-centered head">
+
+          <h1 class="title is-2 publication-title"> 
+            <span style="color: #EA4335;">V</span><span style="color: #4285F4;">En</span><span style="color: #FBBC05;">han</span><span style="color: #34A853;">cer</span>
+          </h1>
+          <h1 class="title is-3 publication-title"> 
+            Generative Space-Time Enhancement for Video Generation
+          </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=GUxrycUAAAAJ&hl=zh-CN">Jingwen He</a><sup>1,2</sup>,&nbsp;&nbsp;</span>
+            <span class="author-block">
+              <a href="https://tianfan.info">Tianfan Xue</a><sup>1</sup>,&nbsp;&nbsp;</span>
+            <span class="author-block">
+              <a href="https://github.com/ChrisLiu6">Dongyang Liu</a><sup>2</sup>,&nbsp;&nbsp;</span> 
+            <span class="author-block">
+              <a href="https://github.com/0x3f3f3f3fun">Xinqi Lin</a><sup>2</sup>,&nbsp;&nbsp;</span>
+            <span class="author-block">
+              <a href="https://gaopengcuhk.github.io">Peng Gao</a><sup>2</sup>,&nbsp;&nbsp;</span>
+            <span class="author-block">
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=GMzzRRUAAAAJ&hl=en">Dahua Lin</a><sup>1</sup>,&nbsp;&nbsp;</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=gFtI-8QAAAAJ&hl=en">Yu Qiao</a><sup>2</sup>,&nbsp;&nbsp;</span>
+            <span class="author-block">
+              <a href="https://wlouyang.github.io">Wanli Ouyang</a><sup>1,2&dagger;</sup>,&nbsp;&nbsp;</span>
+            <span class="author-block">
+              <a href="https://liuziwei7.github.io">Ziwei Liu</a><sup>3&dagger;</sup></span>
+            <span class="author-block">
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>The Chinese University of Hong Kong,&nbsp;&nbsp;</span>
+            <span class="author-block"><sup>2</sup>Shanghai Artificial Intelligence Laboratory,&nbsp;&nbsp;</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>3</sup>S-Lab, Nanyang Technological University</span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>&dagger;</sup>Corresponding authors</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="./xx.pdf" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+              <!-- arXiv Link. -->
+              <span class="link-block">
+                <a href="" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <!-- Code Link. -->
+              <span class="link-block"> 
+                <a href="https://github.com/Vchitect/VEnhancer" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=QMR_5weifGg" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Clown fish swimming through the coral reef.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_Clown fish swimming through the coral reef.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_Clown fish swimming through the coral reef.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">A fat rabbit wearing a purple robe walking through a fantasy landscape.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_A fat rabbit wearing a purple robe walking through a fantasy landscape.-1.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_A fat rabbit wearing a purple robe walking through a fantasy landscape.-1.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">A cat wearing sunglasses at a pool.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_A cat wearing sunglasses at a pool-0.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_A cat wearing sunglasses at a pool-0.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">A cute raccoon playing guitar in a boat on the ocean.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_A cute raccoon playing guitar in a boat on the ocean-3.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_A cute raccoon playing guitar in a boat on the ocean-3.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Gwen Stacy reading a book, black and white.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_Gwen Stacy reading a book, black and white-2.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_Gwen Stacy reading a book, black and white-2.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">A storm trooper vacuuming the beach.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_A storm trooper vacuuming the beach.-4.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_A storm trooper vacuuming the beach.-4.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">a teddy bear is swimming in the ocean.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_a teddy bear is swimming in the ocean.-0.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_a teddy bear is swimming in the ocean.-0.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Iron Man flying in the sky.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_Iron Man flying in the sky-4.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_Iron Man flying in the sky-4.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">The bund Shanghai by Hokusai, in the style of Ukiyo.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_The bund Shanghai by Hokusai, in the style of Ukiyo-1.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_The bund Shanghai by Hokusai, in the style of Ukiyo-1.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">An astronaut is riding a horse in the space in a photorealistic style.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_An astronaut is riding a horse in the space in a photorealistic style.-1.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_An astronaut is riding a horse in the space in a photorealistic style.-1.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">A cute happy Corgi playing in park, sunset, in cyberpunk style.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_A cute happy Corgi playing in park, sunset, in cyberpunk style-3.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_A cute happy Corgi playing in park, sunset, in cyberpunk style-3.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">A teddy bear is playing drum kit in NYC Times Square.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_A teddy bear is playing drum kit in NYC Times Square.-0.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_A teddy bear is playing drum kit in NYC Times Square.-0.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">An astronaut flying in space, featuring a steady and smooth perspective.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_An astronaut flying in space, featuring a steady and smooth perspective-2.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_An astronaut flying in space, featuring a steady and smooth perspective-2.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">An epic tornado attacking above a glowing city at night, the tornado is made of smoke.</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/input_An epic tornado attacking above a glowing city at night, the tornado is made of smoke-4.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/out_An epic tornado attacking above a glowing city at night, the tornado is made of smoke-4.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <!-- <div class="column"> -->
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present <b>VEnhancer</b>, a generative space-time enhancement framework improves the existing text-to-video results by adding more details in spatial domain and synthetic detailed motion in temporal domain. 
+            Given a generated low-quality video, our approach can increase its spatial and temporal resolution simultaneously with arbitrary up-sampling space and time scales through a unified video diffusion model. 
+            Furthermore, VEnhancer effectively removes generated spatial artifacts and temporal flickering of generated videos. To achieve this, basing on a pretrained video diffusion model, 
+            we train a video ControlNet and inject it to the diffusion model as a condition on low frame-rate and low-resolution videos. To effectively train this video ControlNet, 
+            we design <em>space-time data augmentation</em> as well as <em>video-aware conditioning</em>. Benefiting from the above designs, <b>VEnhancer</b> yields to be stable during training and shares an elegant end-to-end training manner. 
+            Extensive experiments show that <b>VEnhancer</b> surpasses existing state-of-the-art video super-resolution and space-time super-resolution methods in enhancing AI-generated videos. 
+            Moreover, with VEnhancer, exisiting open-source state-of-the-art text-to-video method, VideoCrafter-2, reaches the top one in video generation benchmark --  <a href="https://github.com/Vchitect/VBench">VBench</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <!-- <div class="column is-four-fifths"> -->
+      <div class="column">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <p>
+            The architecture of VEnhancer. It follows ControlNet and copies the architecures and weights of  multi-frame  encoder and middle block of a pretrained video diffusion model to build a trainable condition network. 
+            This video ControlNet accepts low-resolution key frames as well as full frames of noisy latents as inputs. 
+            Also, the noise level $\sigma$ regarding noise augmentation and downscaling factor $s$ serve as additional network conditioning apart from timestep $t$ and prompt $c_{text}$. 
+          </p>
+          <div class="column">
+            <img src="./assets/images/venhancer_arch.png" />
+          </div>
+        </div>
+
+        <!-- Paper video. -->
+          <div id="spotlight-video">
+            <div class="container is-max-desktop">
+                <div class="column">
+                  <h2 class="title is-3">
+                    <span class="a">VEnhancer</span>
+                    <span class="b">Demo</span>
+                  </h2>
+                  <div class="publication-video">
+                    <iframe src="https://www.youtube.com/embed/QMR_5weifGg?rel=0&amp;showinfo=0"
+                            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{he2024venhancer,
+      title={VEnhancer: Generative Space-Time Enhancement for Video Generation}, 
+      author={Jingwen He and Tianfan Xue and Dongyang Liu and Xinqi Lin and Peng Gao and Dahua Lin and Yu Qiao and Wanli Ouyang and Ziwei Liu},
+      year={2024},
+      eprint={2308.15070},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="" target="_blank">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/Vchitect/VEnhancer" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+      <a class="icon-link" href="https://youtu.be/QMR_5weifGg" target="_blank">
+        <i class="fab fa-youtube"></i>
+      </a>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <div class="columns is-centered"><p>
+            This website template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">Here</a>. 
+          </p></div>
+        </div>
+      </div>
+    </div>
+
+    <!--=================Visitor==========================-->
+    <!-- <div class="content has-text-centered" style="padding:0 0 0 0">
+      <img src='https://visitor-badge.laobi.icu/badge?page_id=Vchitect/VEnhancer' alt='visitors'>
+    </div> -->
+
+  </div>
+</footer>
+
+  <!-- custom js file  -->
+  <!-- <script defer src="./assets/js/fontawesome.all.min.js"></script> -->
+  <script src="./assets/js/bulma-carousel.min.js"></script>
+  <script src="./assets/js/bulma-slider.min.js"></script>
+  <script src="./assets/js/index.js"></script>
+  <script src="./assets/js/jquery.event.move.js"></script>
+  <script src="./assets/js/jquery.twentytwenty.js"></script>
+  <script>
+  $(function(){
+    $(".twentytwenty-container").twentytwenty();
+    // $(".twentytwenty-container", "#results-carousel").twentytwenty({default_offset_pct: 0.5, ratio: 0.5});
+  });
+  </script>
+</body>
+</html>
